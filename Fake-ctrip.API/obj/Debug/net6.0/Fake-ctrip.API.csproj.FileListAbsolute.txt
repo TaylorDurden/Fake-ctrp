@@ -65,3 +65,5 @@ D:\study\Fake-ctrip.API\Fake-ctrip.API\bin\Debug\net6.0\Microsoft.AspNetCore.Jso
 D:\study\Fake-ctrip.API\Fake-ctrip.API\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 D:\study\Fake-ctrip.API\Fake-ctrip.API\bin\Debug\net6.0\Newtonsoft.Json.dll
 D:\study\Fake-ctrip.API\Fake-ctrip.API\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+D:\study\Fake-ctrip.API\Fake-ctrip.API\bin\Debug\net6.0\MySqlConnector.dll
+D:\study\Fake-ctrip.API\Fake-ctrip.API\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
