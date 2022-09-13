@@ -1,8 +1,18 @@
+using Fake_ctrip.API.Database;
+using Fake_ctrip.API.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
+builder.Services.AddDbContext<AppDbContext>(option => {
+    //option.UseSqlServer("server=192.168.56.1:143333; Database=CTripDB; User Id=sa; Password=-bash07@668aKM;");
+    option.UseSqlServer(builder.Configuration["DbContext:ConnectionString"]);
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
