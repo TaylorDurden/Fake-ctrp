@@ -11,11 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
 builder.Services.AddDbContext<AppDbContext>(options => {
-    //option.UseSqlServer("server=192.168.56.1:143333; Database=CTripDB; User Id=sa; Password=-bash07@668aKM;");
-    //option.UseSqlServer(builder.Configuration["DbContext:ConnectionString"]);
-    var connectionString = builder.Configuration.GetConnectionString("MySQLConnectionString");
-    ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
-    options.UseMySql(connectionString, serverVersion);
+    //options.UseSqlServer("server=192.168.56.1:143333; Database=CTripDB; User Id=sa; Password=-bash07@668aKM;");
+    options.UseSqlServer(builder.Configuration["DbContext:ConnectionString"]);
+    //var connectionString = builder.Configuration.GetConnectionString("MySQLConnectionString");
+    //ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
+    //options.UseMySql(connectionString, serverVersion);
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
