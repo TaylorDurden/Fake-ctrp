@@ -1,5 +1,6 @@
 using Fake_ctrip.API.Database;
 using Fake_ctrip.API.Services;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
@@ -8,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(setupAction => {
+    setupAction.ReturnHttpNotAcceptable = true;
+    setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
+}).AddXmlDataContractSerializerFormatters();
 builder.Services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
 builder.Services.AddDbContext<AppDbContext>(options => {
     //options.UseSqlServer("server=192.168.56.1:143333; Database=CTripDB; User Id=sa; Password=-bash07@668aKM;");
@@ -20,6 +24,8 @@ builder.Services.AddDbContext<AppDbContext>(options => {
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+// É¨ÃèprofileÎÄ¼þ
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

@@ -6,5 +6,8 @@ namespace Fake_ctrip.API.Services
     {
         IEnumerable<TouristRoute> GetTouristRoutes();
         TouristRoute GetTouristRoute(Guid id);
+        bool HasTouristRoute(Guid id);
+        IEnumerable<TouristRoutePicture> GetPicturesByTouristRouteId(Guid touristRouteId);
+        TouristRoutePicture GetPicture(int id);
     }
 }

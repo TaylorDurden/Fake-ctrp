@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "1NNF9jybtZkhmYOh9VV35rq36ENR5tKGe3HyKuKINSlGRiOM1g4bGDgC1T9xeGhO49XH3IgTZyzb9MIlQ4eGSg==",
+  "dgSpecHash": "4NOjB4pchpPGwm4BnilfVqf4hMGVqGNgYjL3bCVvCVn4EHhiv7n5U+E+TiiZqReHP6QhBcR5YwWNnqWtdLhjCw==",
   "success": true,
   "projectFilePath": "D:\\study\\Fake-ctrip.API\\Fake-ctrip.API\\Fake-ctrip.API.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.9\\microsoft.aspnetcore.jsonpatch.6.0.9.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.9\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.9.nupkg.sha512",
