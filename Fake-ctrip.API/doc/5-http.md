@@ -23,3 +23,14 @@
 - 关键词搜索
 - 数据过滤
 - 参数封装，统一管理
+
+向API传入参数，使用Attribute：[[FromXXX]
+
+|   Attribute   |                         参数来源                         |
+| :-----------: | :------------------------------------------------------: |
+|  [FromQuery]  | 请求url的参数字符串，https://xxx.com/search?id=1&age=18  |
+|  [FromBody]   |                       请求主体数据                       |
+|  [FromForm]   |    请求主体的表单数据(IFormFile, IFormFileCollection)    |
+|  [FromRoute]  | MVC架构下的Route路由URL的参数，https://xxx.com/users/123 |
+| [FromService] |                数据来源于已注入的服务依赖                |
+

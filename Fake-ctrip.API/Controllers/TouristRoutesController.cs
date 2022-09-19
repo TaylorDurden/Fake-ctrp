@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Fake_ctrip.API.Models;
+using Fake_ctrip.API.ResourceParams;
 using Fake_ctrip.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace Fake_ctrip.API.Controllers
 {
@@ -19,11 +21,17 @@ namespace Fake_ctrip.API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="keyword"></param>
+        /// <param name="rating">lessThan, largerThan, equalTo</param>
+        /// <returns></returns>
         [HttpGet]
         [HttpHead]
-        public IActionResult GetTouristRoutes()
+        public IActionResult GetTouristRoutes([FromQuery]TouristRouteResourceParams queryParams)
         {
-            var routesFromRepo = _touristRouteRepository.GetTouristRoutes();
+            var routesFromRepo = _touristRouteRepository.GetTouristRoutes(queryParams?.Keyword, queryParams.RatingOperator, queryParams.RatingVal);
             if (routesFromRepo == null || routesFromRepo.Count() <= 0)
             {
                 return NotFound("No routes found.");
