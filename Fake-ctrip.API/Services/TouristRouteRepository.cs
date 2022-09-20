@@ -52,5 +52,34 @@ namespace Fake_ctrip.API.Services
         {
             return _context.TouristRoutes.Any(x => x.Id == id);
         }
+
+        public void CreateTouristRoute(TouristRoute touristRoute)
+        {
+            if (touristRoute == null)
+            {
+                throw new ArgumentNullException(nameof(TouristRoute));
+            }
+            _context.TouristRoutes.Add(touristRoute);
+            //_context.SaveChanges();
+        }
+
+        public bool Save()
+        {
+            return _context.SaveChanges() >= 0;
+        }
+
+        public void CreateTouristRoutePicture(Guid touristRouteId, TouristRoutePicture touristRoutePicture)
+        {
+            if (touristRouteId == Guid.Empty) 
+            {
+                throw new ArgumentNullException(nameof(touristRouteId));
+            }
+            if (touristRoutePicture == null)
+            {
+                throw new ArgumentNullException(nameof(TouristRoutePicture));
+            }
+            touristRoutePicture.TouristRouteId = touristRouteId;
+            _context.TouristRoutePictures.Add(touristRoutePicture);
+        }
     }
 }

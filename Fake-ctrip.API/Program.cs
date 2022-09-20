@@ -1,5 +1,6 @@
 using Fake_ctrip.API.Database;
 using Fake_ctrip.API.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -9,12 +10,33 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(setupAction => {
+builder.Services.AddControllers(setupAction =>
+{
     setupAction.ReturnHttpNotAcceptable = true;
-    setupAction.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter());
-}).AddXmlDataContractSerializerFormatters();
+})
+    .AddXmlDataContractSerializerFormatters()
+    .ConfigureApiBehaviorOptions(setupAction =>
+    {
+        setupAction.InvalidModelStateResponseFactory = context =>
+        {
+            var invalidDetail = new ValidationProblemDetails(context.ModelState)
+            {
+                Type = "whatever",
+                Title = "Data validation failed.",
+                Status = StatusCodes.Status422UnprocessableEntity,
+                Detail = "Refer to details.",
+                Instance = context.HttpContext.Request.Path
+            };
+            invalidDetail.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+            return new UnprocessableEntityObjectResult(invalidDetail) 
+            { 
+                ContentTypes = { "application/problem+json" }
+            };
+        };
+    });
 builder.Services.AddTransient<ITouristRouteRepository, TouristRouteRepository>();
-builder.Services.AddDbContext<AppDbContext>(options => {
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
     //options.UseSqlServer("server=192.168.56.1:143333; Database=CTripDB; User Id=sa; Password=-bash07@668aKM;");
     options.UseSqlServer(builder.Configuration["DbContext:ConnectionString"]);
     //var connectionString = builder.Configuration.GetConnectionString("MySQLConnectionString");

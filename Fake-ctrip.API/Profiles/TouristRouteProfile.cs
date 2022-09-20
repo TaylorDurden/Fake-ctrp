@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Fake_ctrip.API.Dtos;
 using Fake_ctrip.API.Models;
 
 namespace Fake_ctrip.API.Profiles
@@ -23,6 +24,11 @@ namespace Fake_ctrip.API.Profiles
                 .ForMember(
                     dest => dest.DepartureCity,
                     opt => opt.MapFrom(src => src.DepartureCity.ToString())
+                );
+            CreateMap<CreateTouristRouteComand, TouristRoute>()
+                .ForMember(
+                    dest => dest.Id,
+                    opt => opt.MapFrom(src => Guid.NewGuid())
                 );
         }
     }

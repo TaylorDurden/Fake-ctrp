@@ -52,3 +52,12 @@ Level 3: Hypermedia Controls
 
 - Github
   https://developer.github.com/v3/
+
+
+## 幂等性
+
+同样的操作不论经过多少次调用，返回的数据、或者产生的效果都是一致的
+- a = 1; 幂等
+- a++; 不幂等
+
+幂等性是数据概念，表达的是N次交换与1次交换的结果相同

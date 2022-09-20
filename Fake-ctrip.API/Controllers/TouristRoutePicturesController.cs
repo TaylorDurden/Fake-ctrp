@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using Fake_ctrip.API.Dtos;
 using Fake_ctrip.API.Models;
 using Fake_ctrip.API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 
 namespace Fake_ctrip.API.Controllers
@@ -34,7 +36,7 @@ namespace Fake_ctrip.API.Controllers
             return Ok(picturesDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetPicture")]
         public IActionResult GetPicture(Guid touristRouteId, int id)
         {
             if (!_touristRouteRepository.HasTouristRoute(touristRouteId))
@@ -47,6 +49,24 @@ namespace Fake_ctrip.API.Controllers
                 return NotFound("Not found picture.");
             }
             return Ok(_mapper.Map<TouristRoutePictureDto>(pictureFromRepo));
+        }
+
+        [HttpPost]
+        public IActionResult CreateTouristRoutePicture(Guid touristRouteId, [FromBody] CreateTouristRoutePictureCommand command)
+        {
+            if (!_touristRouteRepository.HasTouristRoute(touristRouteId))
+            {
+                return NotFound("Not found tourist route.");
+            }
+            var model = _mapper.Map<TouristRoutePicture>(command);
+            _touristRouteRepository.CreateTouristRoutePicture(touristRouteId, model);
+            _touristRouteRepository.Save();
+            var returnModel = _mapper.Map<TouristRoutePictureDto>(model);
+            return CreatedAtRoute(
+                "GetPicture",
+                new { TouristRouteId = model.TouristRouteId, Id = model.Id },
+                returnModel
+            );
         }
     }
 }
